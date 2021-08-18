@@ -1,3 +1,8 @@
+题目链接
+  [Codeforces Round #733 (Div. 1 + Div. 2) D. Secret Santa](https://codeforces.ml/contest/1530/problem/D)
+CSDN链接
+  https://blog.csdn.net/weixin_49428483/article/details/118875890?spm=1001.2014.3001.5501
+
 题意：
   有t组样例
   输入一个长度n
@@ -121,4 +126,4 @@ int main(){
     }
 }
 
- https://blog.csdn.net/weixin_49428483/article/details/118875890?spm=1001.2014.3001.5501
+

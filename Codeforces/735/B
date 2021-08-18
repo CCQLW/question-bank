@@ -1,0 +1,29 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+
+using namespace std;
+typedef long long ll;
+
+const int N = 1e5+9;
+
+ll a[N];
+ll n,k;
+
+int main(){
+    int t;
+    scanf("%d", &t);
+    while (t -- ){
+        scanf("%lld%lld", &n, &k);
+        for (int i = 1; i <= n; i ++ ) scanf("%lld", &a[i]);
+        ll ans=-0x3f3f3f3f;
+        for (ll i = max(n-500,1ll); i < n; i ++ ){
+            for (ll j = i+1; j <= n; j ++ ){
+                ans=max(ans,i*j-k*(a[i]|a[j]));
+                // printf("%d %d %d\n",i,j,i*j-k*(a[i]|a[j]));
+            }
+        }
+        printf("%lld\n",ans);
+    }
+}

@@ -1,0 +1,30 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+
+using namespace std;
+
+const int N = 1e5+9;
+
+int n,m;
+
+int main(){
+    int t;
+    scanf("%d", &t);
+    while (t -- ){
+        scanf("%d%d", &n, &m);
+        if(n>m){
+            puts("0");
+            continue;
+        }
+        m++;
+        int ans=0;
+        for (int i = 30; i >=0 && n < m; i -- ){
+            int x=n>>i&1,y=m>>i&1;
+            if(x==y) continue;
+            if(y) ans|=1<<i; n|=1<<i;
+        }
+        printf("%d\n",ans);
+    }
+}

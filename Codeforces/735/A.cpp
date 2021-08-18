@@ -1,4 +1,4 @@
-```ruby
+
 #include <iostream>
 #include <cstring>
 #include <algorithm>
@@ -24,4 +24,4 @@ int main(){
         printf("%lld\n",sum);
     }
 }
-```
+

@@ -1,0 +1,124 @@
+题意：
+  有t组样例
+  输入一个长度n
+  输入n个数字
+  a[1],a[2],a[3], … ,a[n];
+  求一个i!=a[i]的序列(错排)
+尝试过程
+  将所有数，放入vis中，判断是否出现大于一次，如果出现1次以上，将数放入b数组中，从大到小排序，将b放回到数组中去，如果当前的 i==b[j],与下一个位置的b交换。
+  wa了一次后，
+  如果当前的位置的vis大于1，并且i!=b[j],将a[i]=b[j]。按从大到小排序，最后将所有b放入a中。
+
+  TLE 因为memset超时，改了很久，最后才发现。
+
+方法一
+
+  将所有数，放入vis中，判断是否出现大于一次，如果出现1次以上，将数放入b数组中，从大到小排序，如果当前的位置的vis大于1，并且i!=b[j],将a[i]=b[j]。按从大到小排序，最后将所有b放入a中。
+
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 2e5+9;
+ 
+int n;
+int v[N];
+int a[N],b[N];
+bool cmp(int a,int b){
+    return a>b;
+}
+int main(){
+    int i,j;
+    int t;
+    scanf("%d", &t);
+    while(t--){
+        int len=1;
+        for (int i = 1; i <= n; i ++ ){
+            v[i]=b[i]=0;
+        }
+
+        scanf("%d", &n);
+        for (int i = 1; i <= n; i ++ ){
+            scanf("%d", &a[i]);
+            v[a[i]]++;
+        }
+        for (int i = 1; i <= n; i ++ ){
+            if(v[i]==0)  b[len++]=i;
+        }
+        
+        sort(b+1,b+len+1,cmp);
+        int num=0;
+        for (i = 1,j= 1; i <= n; i ++ ){
+            if(v[a[i]]>1&&i!=b[j]){
+                v[a[i]]--;
+                a[i]=b[j++];
+                num++;
+            }
+        }
+        
+        for (int i = 1; i <= n; i ++ ){
+            if(v[a[i]]>1){
+                v[a[i]]--;
+                a[i]=b[--len];
+                num++;
+            }
+        }
+        
+        printf("%d\n",n-num);
+        for (int i = 1; i <= n; i ++ ) printf("%d ",a[i]);
+        puts("");
+    }
+}
+
+方法二
+  将所有数，放入vis中，判断是否出现大于一次，如果出现1次以上，将数放入b数组中，从大到小排序，如果当前的位置的vis大于1，并且i！=b[j],将a[i]=b[j]，否则continue。
+
+  因为可以将后一次出现的位置上的数进行更改，所以不会出现i==a[i]的情况。
+
+
+#include<bits/stdc++.h>
+using namespace std;
+const int N = 2e5+9;
+ 
+int n;
+int v[N];
+int a[N],b[N];
+bool cmp(int a,int b){
+    return a>b;
+}
+int main(){
+    int i,j;
+    int t;
+    scanf("%d", &t);
+    while(t--){
+        int len=1;
+        for (int i = 1; i <= n; i ++ ){
+            v[i]=b[i]=0;
+        }
+        // memset(v, 0, sizeof v);
+        // memset(b, 0, sizeof b);
+        scanf("%d", &n);
+        for (int i = 1; i <= n; i ++ ){
+            scanf("%d", &a[i]);
+            v[a[i]]++;
+        }
+        for (int i = 1; i <= n; i ++ ){
+            if(v[i]==0)  b[len++]=i;
+        }
+        
+        sort(b+1,b+len+1,cmp);
+        int num=0;
+        for (i = 1,j= 1; i <= n; i ++ ){
+            if(v[a[i]]>1){
+                if(i==b[j]) continue;
+                v[a[i]]--;
+                a[i]=b[j++];
+                num++;
+            }
+        }
+        
+        printf("%d\n",n-num);
+        for (int i = 1; i <= n; i ++ ) printf("%d ",a[i]);
+        puts("");
+    }
+}
+
+ https://blog.csdn.net/weixin_49428483/article/details/118875890?spm=1001.2014.3001.5501

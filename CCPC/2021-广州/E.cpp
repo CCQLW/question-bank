@@ -10,6 +10,7 @@ int h[N], e[M], w[M], ne[M], idx;
 int st[N];
 int dist[2009][2009];
 
+
 void add(int a, int b, int c)  // 添加一条边a->b，边权为c
 {
     e[idx] = b, w[idx] = c, ne[idx] = h[a], h[a] = idx++;
